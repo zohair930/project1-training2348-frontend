@@ -1,0 +1,29 @@
+.navBar {
+  margin: auto;
+  border: solid;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-width: 1px;
+  background: white;
+}
+
+.navItem {
+  margin-right: 40px;
+  text-decoration: none;
+  color: black;
+  border: solid;
+  padding: 5px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-width: 1px;
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+
+
+}
+
+.navItem:hover {
+  color: white;
+  background: black;
+}

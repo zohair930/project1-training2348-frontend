@@ -1,0 +1,71 @@
+/* Outer wrapper gives us rounded corners and a subtle frame */
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Table base */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+  font-size: 0.95rem;
+}
+
+/* Header */
+.headerRow th {
+  text-align: center;
+  padding: 12px 14px;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+  font-weight: 600;
+}
+
+/* Body rows */
+.row td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #111827;
+}
+
+/* Zebra striping */
+.row:nth-child(even) td {
+  background-color: #fcfcfd;
+}
+
+/* Hover state */
+.row:hover td {
+  background-color: #f3f4f6;
+}
+
+/* ID column: slightly tighter + muted */
+.idCell {
+  width: 80px;
+  color: #374151;
+}
+
+/* Optional truncation for long text */
+.cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 5px;
+  border-width: 3px;
+  background-color: white;
+}
+
+.btn:hover {
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
