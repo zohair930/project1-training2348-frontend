@@ -36,7 +36,7 @@ export default function Login() {
           <input
             id="username"
             className={styles.input}
-            name="name"
+            name="username"
             value={userFormData.username}
             onChange={onChangeHandler}
           />
