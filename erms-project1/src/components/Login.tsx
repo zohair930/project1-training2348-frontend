@@ -1,10 +1,10 @@
-import React, { ChangeEventHandler, useState, useContext } from 'react'
-import { AuthContext, Person } from '../util/types';
+import React, { useState } from 'react'
+import { User } from '../util/types';
 import styles from './PetItem.module.css';
 import { useAuth } from '../hooks/useAuth';
 
 export default function Login() {
-  const [userFormData, setUserFormData] = useState<Person>({ name: 'Shaggy', password: 'loveScoob' });
+  const [userFormData, setUserFormData] = useState<User>({ username: '', password: ''});
 
   // retrieve login function from our custom hook:
   const {login} = useAuth();
@@ -19,7 +19,7 @@ export default function Login() {
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (userFormData.password) login(userFormData.name, userFormData.password);
+    if (userFormData.password) login(userFormData.username, userFormData.password);
 
   }
 
@@ -28,6 +28,7 @@ export default function Login() {
   return (
     <div className={styles.wrapper}>
       <form className={styles.form} onSubmit={onSubmitHandler}>
+
         <div className={styles.field}>
           <label className={styles.label} htmlFor="username">
             Username
@@ -36,7 +37,7 @@ export default function Login() {
             id="username"
             className={styles.input}
             name="name"
-            value={userFormData.name}
+            value={userFormData.username}
             onChange={onChangeHandler}
           />
         </div>
