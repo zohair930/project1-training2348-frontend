@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AuthContext, AuthContextValue, Person } from '../util/types';
+import { AuthContext, AuthContextValue, User } from '../util/types';
 import axios from 'axios';
 import base_url from '../util/url';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 // So, we have to pass children as parameters so we can pass them along to the AuthContext below
 export default function AuthProvider({ children } : {children: React.ReactNode }) {
   // keep track of the logged in user:
-  const [user, setUser] = useState<Person | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   const navigate = useNavigate();
 
