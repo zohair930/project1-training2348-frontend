@@ -14,9 +14,11 @@ export default function AuthProvider({ children } : {children: React.ReactNode }
   const navigate = useNavigate();
 
   // login function, calls our API:
-  const login = async (name: string, password: string) => {    
+  const login = async (username: string, password: string) => {    
     try {
-      let response = await axios.post(`${base_url}/login`, {username: name, password});
+      let user = {username: username, password: password};
+      console.log(user)
+      let response = await axios.post(`${base_url}/login`, user);
       setUser(response.data)
       navigate('/');
     } catch (error:any) {
