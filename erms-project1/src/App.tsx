@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Pets from './components/Pets';
-import PetItem from './components/PetItem';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import AuthProvider from './components/AuthProvider';
-import AdoptedPets from './components/AdoptedPets';
-import AddPet from './components/AddPet';
+import Register from './components/Register';
+import UserAccount from './components/UserAccount';
 
 
 function App() {
@@ -17,11 +15,9 @@ function App() {
         <AuthProvider>
           <Navbar />
           <Routes>
-            <Route path='/' Component={Pets} />
-            <Route path='/pets/:id' Component={PetItem} />
             <Route path='/login' Component={Login} />
-            <Route path='/adopted' Component={AdoptedPets}/>
-            <Route path ='/add' Component={AddPet} />
+            <Route path='/register' Component={Register} />
+            <Route path='/account' Component={UserAccount} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

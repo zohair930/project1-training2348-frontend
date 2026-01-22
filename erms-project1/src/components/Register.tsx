@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { User } from '../util/types';
+import { User, UserType } from '../util/types';
 import styles from './PetItem.module.css';
 import { useAuth } from '../hooks/useAuth';
 
-export default function Login() {
-  const [userFormData, setUserFormData] = useState<User>({ username: '', password: ''});
+export default function Register() {
+  const [userFormData, setUserFormData] = useState<User>({ username: '', password: '', userType: UserType.EMPLOYEE});
+
   // retrieve login function from our custom hook:
-  const {login} = useAuth();
+  const {register} = useAuth();
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -18,9 +19,8 @@ export default function Login() {
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (userFormData.password) {
-      login(userFormData.username, userFormData.password);
-    }
+    if (userFormData.password) register(userFormData.username, userFormData.password, userFormData.userType);
+
   }
 
 
@@ -56,12 +56,39 @@ export default function Login() {
           />
         </div>
 
+          <div className={styles.field}>
+          <label className={styles.label} htmlFor="userType">
+            Manager
+          </label>
+          <input
+            id="userType"
+            type="radio"
+            className={styles.input}
+            name="userType"
+            value={UserType.MANAGER}
+            onChange={onChangeHandler}
+          />
+        </div>
+          <div className={styles.field}>
+          <label className={styles.label} htmlFor="userType">
+            Employee
+          </label>
+          <input
+            id="userType"
+            type="radio"
+            className={styles.input}
+            name="userType"
+            value={UserType.EMPLOYEE}
+            defaultChecked
+            onChange={onChangeHandler}
+          />
+        </div>
         <div className={styles.actions}>
           <button
             type="submit"
             className={`${styles.button} ${styles.primary}`}
           >
-            Log In
+            Register
           </button>
 
         </div>

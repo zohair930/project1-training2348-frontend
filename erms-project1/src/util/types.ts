@@ -1,4 +1,5 @@
 import {createContext } from 'react';
+import useState from 'react';
 
 export interface Pet {
   id?: number,
@@ -19,7 +20,7 @@ export interface User {
   id?: number,
   username: string,
   password: string,
-  userType?: string,
+  userType?: UserType,
   account?: Account
 }
 
@@ -34,7 +35,8 @@ export type Users = User[];
 export interface Ticket{
   id?: number,
   description: string,
-  balance: number
+  balance: number,
+  status: TicketStatus
 }
 
 export enum TicketStatus {
@@ -48,8 +50,8 @@ export type Tickets = Ticket[];
 
 export interface Account {
   id?: number,
-  name: string,
-  password: string
+  balance: string,
+  tickets?: Tickets
 }
 
 export interface Person {
@@ -63,6 +65,7 @@ export interface Person {
 export type AuthContextValue = {
   user: User | null;
   login: (name: string, password: string) => Promise<void>;
+  register: (name: string, password: string, userType?: UserType) => Promise<void>;
   logout: () => void;
 }
 
