@@ -10,7 +10,8 @@ export default function Navbar() {
   const {logout, user} = useAuth();
 
   const logoutHandler = () => {
-    console.log(user)
+    console.log("User" + user)
+    console.log("Account" + user?.account)
     logout();
     navigate('/');
   }

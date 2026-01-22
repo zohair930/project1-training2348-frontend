@@ -17,7 +17,7 @@ export interface Person {
 }
 
 export interface User {
-  id?: number,
+  userId?: number,
   username: string,
   password: string,
   userType?: UserType,
@@ -35,7 +35,7 @@ export type Users = User[];
 export interface Ticket{
   id?: number,
   description: string,
-  balance: number,
+  price: number,
   status: TicketStatus
 }
 
