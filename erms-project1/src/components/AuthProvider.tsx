@@ -35,6 +35,7 @@ export default function AuthProvider({ children } : {children: React.ReactNode }
       let user = {username: username, password: password};
       console.log(user)
       let response = await axios.post(`${base_url}/register`, user);
+      console.log(response.data)
       setUser(response.data)
       navigate('/account');
     } catch (error:any) {

@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import AuthProvider from './components/AuthProvider';
 import Register from './components/Register';
 import UserAccount from './components/UserAccount';
+import Tickets from './components/Tickets';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path='/login' Component={Login} />
             <Route path='/register' Component={Register} />
             <Route path='/account' Component={UserAccount} />
+            <Route path='/tickets' Component={Tickets} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
