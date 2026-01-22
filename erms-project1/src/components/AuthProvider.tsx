@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AuthContext, AuthContextValue, User } from '../util/types';
+import { AuthContext, AuthContextValue, User, UserType } from '../util/types';
 import axios from 'axios';
 import base_url from '../util/url';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ export default function AuthProvider({ children } : {children: React.ReactNode }
       console.log(user)
       let response = await axios.post(`${base_url}/login`, user);
       setUser(response.data)
-      navigate('/');
+      navigate('/account');
     } catch (error:any) {
       console.error(error)
       // keep the message vague for security:
@@ -28,6 +28,20 @@ export default function AuthProvider({ children } : {children: React.ReactNode }
     }
     
 
+  }
+
+    const register = async (username: string, password: string, userType?: UserType) => {    
+    try {
+      let user = {username: username, password: password};
+      console.log(user)
+      let response = await axios.post(`${base_url}/register`, user);
+      setUser(response.data)
+      navigate('/account');
+    } catch (error:any) {
+      console.error(error)
+      // keep the message vague for security:
+      alert("Username is taken, please choose another");
+    }
   }
 
   // when we logout, set the user to null:
@@ -38,6 +52,7 @@ export default function AuthProvider({ children } : {children: React.ReactNode }
   const value: AuthContextValue = {
     user,
     login,
+    register,
     logout
   }
 
