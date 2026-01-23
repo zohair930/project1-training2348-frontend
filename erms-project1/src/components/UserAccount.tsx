@@ -18,6 +18,7 @@ export default function UserAccount() {
     let id = user?.userId;
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [status, setStatus] = useState<TicketStatus>(TicketStatus.PENDING);
+    const [owner, setOwner] = useState<Account>({balance: 0});
     const [showCreateForm, setShowCreateForm] = useState(false);
 
     const [formData, setFormData] = useState<Ticket>({
@@ -92,20 +93,21 @@ export default function UserAccount() {
       }
 
       if (!formData.id || formData.id <= 0) {
-        alert("Price must be greater than 0");
+        alert("Id must be greater than 0");
         return;
       }
 
       try {
         console.log("Updating ticket with id: " + formData.id + " to status: " + formData.status)
-        console.log(`${base_url}/accounts/${formData.account?.id}/tickets/${formData.id}`)
-        await axios.post(`${base_url}/accounts/${formData.account?.id}/tickets/${formData.id}`, {id: formData.id, status: formData.status});
+        // console.log(`${base_url}tickets/${formData.id}`)
+          console.log(formData)
+        await axios.patch(`${base_url}/accounts/${owner.id}/tickets/${formData.id}`, { status: formData.status });
         
         setFormData({ id: id, description: formData.description, price: formData.price, status: formData.status });
         setShowCreateForm(false);
         await fetchTickets();
         alert("Ticket updated!");
-         console.log(formData)
+       
       } catch (error) {
         console.error(error);
         alert("Could not update ticket status");
@@ -140,7 +142,22 @@ export default function UserAccount() {
     console.log(formData)
   }
 
+   const onTicketIdChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("On ticket id change triggered")
+    if (!account) return;
+
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    })
+    let ticketOwner = await axios.get(`${base_url}/tickets/${event.target.value}`);
+    setOwner(ticketOwner.data.account);
+    console.log(formData)
+    console.log("Owner: " + ticketOwner.data.account.user.username)
+  }
+
   function handleCategoryChange(event: React.ChangeEvent<HTMLSelectElement>): void {
+    event.preventDefault();
     if (!account) return;
     setFormData({
       ...formData,
@@ -205,14 +222,15 @@ export default function UserAccount() {
                     type="number"
                     placeholder="Ticket ID"
                     value={formData.id}
-                    onChange={onChangeHandler}
+                    onChange={onTicketIdChange}
                   />
                   <label className={styles.label} htmlFor="status">
                     Status
                   </label>
-                  <select name="category" value={formData.status} onChange={event => handleCategoryChange(event)}>
-                              <option id="0" defaultChecked>Approve</option>
-                              <option id="1" >Deny</option>
+                  <select name="status" value={formData.status} onChange={event => handleCategoryChange(event)}>
+                              <option id="0" defaultChecked></option>
+                              <option id="1" value={TicketStatus.DENIED}>Deny</option>
+                              <option id="2" value={TicketStatus.APPROVED}>Approve</option>
                           </select>
 
                   <button type="submit" className={styles.btn}>
