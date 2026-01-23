@@ -17,7 +17,6 @@ export default function AuthProvider({ children } : {children: React.ReactNode }
   const login = async (username: string, password: string) => {    
     try {
       let user = {username: username, password: password};
-      console.log(user)
       let response = await axios.post(`${base_url}/login`, user);
       setUser(response.data)
       navigate('/account');
@@ -33,9 +32,7 @@ export default function AuthProvider({ children } : {children: React.ReactNode }
     const register = async (username: string, password: string, userType?: UserType) => {    
     try {
       let user = {username: username, password: password};
-      console.log(user)
       let response = await axios.post(`${base_url}/register`, user);
-      console.log(response.data)
       setUser(response.data)
       navigate('/account');
     } catch (error:any) {
