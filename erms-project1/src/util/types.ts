@@ -36,7 +36,8 @@ export interface Ticket{
   id?: number,
   description: string,
   price: number,
-  status: TicketStatus
+  status?: TicketStatus,
+  account?: Account
 }
 
 export enum TicketStatus {
@@ -50,8 +51,9 @@ export type Tickets = Ticket[];
 
 export interface Account {
   id?: number,
-  balance: string,
-  tickets?: Tickets
+  balance: number,
+  tickets?: Tickets,
+  user?: User
 }
 
 export interface Person {

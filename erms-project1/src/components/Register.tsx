@@ -20,7 +20,6 @@ export default function Register() {
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (userFormData.password) register(userFormData.username, userFormData.password, userFormData.userType);
-
   }
 
 
@@ -52,34 +51,6 @@ export default function Register() {
             type="password"
             name="password"
             value={userFormData.password}
-            onChange={onChangeHandler}
-          />
-        </div>
-
-          <div className={styles.field}>
-          <label className={styles.label} htmlFor="userType">
-            Manager
-          </label>
-          <input
-            id="userType"
-            type="radio"
-            className={styles.input}
-            name="userType"
-            value={UserType.MANAGER}
-            onChange={onChangeHandler}
-          />
-        </div>
-          <div className={styles.field}>
-          <label className={styles.label} htmlFor="userType">
-            Employee
-          </label>
-          <input
-            id="userType"
-            type="radio"
-            className={styles.input}
-            name="userType"
-            value={UserType.EMPLOYEE}
-            defaultChecked
             onChange={onChangeHandler}
           />
         </div>
